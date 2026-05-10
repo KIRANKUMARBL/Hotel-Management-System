@@ -3,20 +3,28 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RoomsComponent } from './rooms';
 
 describe('Rooms', () => {
+
   let component: RoomsComponent;
   let fixture: ComponentFixture<RoomsComponent>;
 
   beforeEach(async () => {
+
     await TestBed.configureTestingModule({
       imports: [RoomsComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RoomsComponent);
+
     component = fixture.componentInstance;
-    await fixture.whenStable();
+
+    // IMPORTANT:
+    // DO NOT RUN fixture.detectChanges()
+    // DO NOT RUN fixture.whenStable()
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

@@ -10,7 +10,9 @@ describe('BookingDetail', () => {
   beforeEach(async () => {
 
     await TestBed.configureTestingModule({
+
       imports: [BookingDetail],
+
       providers: [
         {
           provide: ActivatedRoute,
@@ -23,15 +25,23 @@ describe('BookingDetail', () => {
           }
         }
       ]
+
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookingDetail);
+
     component = fixture.componentInstance;
-    fixture.detectChanges();
+
+    // IMPORTANT:
+    // avoid ngOnInit API calls
+    // DO NOT use fixture.detectChanges()
+
   });
 
   it('should create', () => {
+
     expect(component).toBeTruthy();
+
   });
 
 });

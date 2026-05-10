@@ -1,39 +1,31 @@
 <div class="layout">
-
   <div class="sidebar">
-
     <h2 class="logo">HMS</h2>
 
     <ul>
-
       <li (click)="goToDashboard()">Dashboard</li>
 
-      <li *ngIf="role === 'OWNER'" (click)="goToUsers()">
-        Staff Management
-      </li>
+      <li *ngIf="role === 'OWNER'" (click)="goToUsers()">Staff Management</li>
 
-      <li *ngIf="role === 'OWNER' || role === 'MANAGER'||role==='RECEPTIONIST'" (click)="goToRooms()">
+      <li
+        *ngIf="role === 'OWNER' || role === 'MANAGER' || role === 'RECEPTIONIST'"
+        (click)="goToRooms()"
+      >
         Rooms
       </li>
 
       <!-- ALL -->
-      <li (click)="goToBookings()">
-        Bookings
-      </li>
+      <li (click)="goToBookings()">Bookings</li>
 
       <li (click)="logout()">Logout</li>
-
     </ul>
-
   </div>
 
   <div class="main">
-
     <h2>Dashboard</h2>
     <p>Welcome, {{ role }}</p>
 
     <div class="stats">
-
       <div class="stat-box">
         <h3>{{ totalRooms }}</h3>
         <p>Total Rooms</p>
@@ -48,38 +40,34 @@
         <h3>{{ bookedRooms }}</h3>
         <p>Booked</p>
       </div>
-
     </div>
-    <h3 style="margin-top:30px;">Recent Bookings</h3>
+    <h3 style="margin-top: 30px">Recent Bookings</h3>
 
-<div class="recent-bookings">
+    <div class="recent-bookings">
+      <div class="recent-grid">
+        <div class="recent-card" *ngFor="let b of bookings.slice(0, 5)">
+          <div class="card-header">
+            <h4>#{{ b.bookingId }}</h4>
+            <span
+              [ngClass]="{
+                confirmed: b.status === 'CONFIRMED',
+                pending: b.status === 'PENDING',
+                failed: b.status === 'FAILED',
+              }"
+            >
+              {{ b.status }}
+            </span>
+          </div>
 
- <div class="recent-grid">
+          <p><strong>Room:</strong> {{ b.roomId }}</p>
 
-  <div class="recent-card" *ngFor="let b of bookings.slice(0,5)">
+          <p><strong>Guest:</strong> {{ b.guest?.name }}</p>
 
-    <div class="card-header">
-      <h4>#{{ b.bookingId }}</h4>
-      <span 
-  [ngClass]="{
-    'confirmed': b.status === 'CONFIRMED',
-    'pending': b.status === 'PENDING',
-    'failed': b.status === 'FAILED'
-  }">
-  {{ b.status }}
-</span>
+          <p><strong>Phone:</strong> {{ b.guest?.phone }}</p>
+
+          <p><strong>Email:</strong> {{ b.guest?.email }}</p>
+        </div>
+      </div>
     </div>
-
-<p><strong>Room:</strong> {{ b.roomId }}</p>
-
-<p><strong>Guest:</strong> {{ b.guest?.name }}</p>
-
-<p><strong>Phone:</strong> {{ b.guest?.phone }}</p>
-
-<p><strong>Email:</strong> {{ b.guest?.email }}</p>
   </div>
-
-</div>
-  </div>
-
 </div>

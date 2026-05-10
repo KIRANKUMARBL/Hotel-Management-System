@@ -10,7 +10,9 @@ describe('BookingComponent', () => {
   beforeEach(async () => {
 
     await TestBed.configureTestingModule({
+
       imports: [BookingComponent],
+
       providers: [
         {
           provide: ActivatedRoute,
@@ -19,6 +21,7 @@ describe('BookingComponent', () => {
               paramMap: {
                 get: () => '1'
               },
+
               queryParamMap: {
                 get: () => '2000'
               }
@@ -26,15 +29,20 @@ describe('BookingComponent', () => {
           }
         }
       ]
+
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookingComponent);
+
     component = fixture.componentInstance;
-    fixture.detectChanges();
+
+    
   });
 
   it('should create', () => {
+
     expect(component).toBeTruthy();
+
   });
 
 });

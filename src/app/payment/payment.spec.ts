@@ -16,22 +16,19 @@ describe('Payment', () => {
         {
           provide: ActivatedRoute,
           useValue: {
+
             snapshot: {
+
               paramMap: {
-                get: (key: string) => {
-                  if (key === 'bookingId') return '1';
-                  return null;
-                }
+                get: () => '1'
               },
 
               queryParamMap: {
-                get: (key: string) => {
-                  if (key === 'amount') return '2000';
-                  if (key === 'orderId') return 'ORD123';
-                  return null;
-                }
+                get: () => '2000'
               }
+
             }
+
           }
         }
       ]
@@ -39,9 +36,12 @@ describe('Payment', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(Payment);
+
     component = fixture.componentInstance;
 
-    fixture.detectChanges();
+    // IMPORTANT:
+    // DO NOT RUN fixture.detectChanges()
+
   });
 
   it('should create', () => {

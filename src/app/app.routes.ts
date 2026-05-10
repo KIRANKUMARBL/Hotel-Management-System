@@ -15,7 +15,6 @@ import { BookingListComponent } from './booking-list/booking-list';
 import { BookingDetail } from './booking-detail/booking-detail';
 
 export const routes: Routes = [
-
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
   { path: 'login', component: LoginComponent },
@@ -23,14 +22,14 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
 
   {
     path: 'rooms',
     component: RoomsComponent,
     canActivate: [authGuard],
-    data: { roles: ['OWNER', 'MANAGER','RECEPTIONIST'] }
+    data: { roles: ['OWNER', 'MANAGER', 'RECEPTIONIST'] },
   },
 
   // ✅ BOOKING CREATION (roomId)
@@ -38,7 +37,7 @@ export const routes: Routes = [
     path: 'booking/create/:roomId',
     component: BookingComponent,
     canActivate: [authGuard],
-    data: { roles: ['OWNER', 'MANAGER', 'RECEPTIONIST'] }
+    data: { roles: ['OWNER', 'MANAGER', 'RECEPTIONIST'] },
   },
 
   // 🔥 NEW: BOOKING DETAILS (IMPORTANT)
@@ -46,44 +45,44 @@ export const routes: Routes = [
     path: 'booking/:bookingId',
     component: BookingDetail,
     canActivate: [authGuard],
-    data: { roles: ['OWNER', 'MANAGER', 'RECEPTIONIST'] }
+    data: { roles: ['OWNER', 'MANAGER', 'RECEPTIONIST'] },
   },
 
   {
     path: 'payment-success',
-    component: PaymentSuccess
+    component: PaymentSuccess,
   },
 
   {
     path: 'payment-failed',
-    component: PaymentFailed
+    component: PaymentFailed,
   },
 
   {
     path: 'payment/:bookingId',
     component: Payment,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
-  path: 'booking-details/:bookingId',
-  component: BookingDetail
+    path: 'booking-details/:bookingId',
+    component: BookingDetail,
   },
   {
     path: 'booking-list',
     component: BookingListComponent,
     canActivate: [authGuard],
-    data: { roles: ['OWNER', 'MANAGER', 'RECEPTIONIST'] }
+    data: { roles: ['OWNER', 'MANAGER', 'RECEPTIONIST'] },
   },
 
   {
     path: 'staff',
     component: StaffManagement,
     canActivate: [authGuard],
-    data: { roles: ['OWNER'] }
+    data: { roles: ['OWNER'] },
   },
 
   {
     path: '**',
-    redirectTo: 'dashboard'
-  }
+    redirectTo: 'dashboard',
+  },
 ];
