@@ -30,7 +30,7 @@ export const routes: Routes = [
     path: 'rooms',
     component: RoomsComponent,
     canActivate: [authGuard],
-    data: { roles: ['OWNER', 'MANAGER'] }
+    data: { roles: ['OWNER', 'MANAGER','RECEPTIONIST'] }
   },
 
   // ✅ BOOKING CREATION (roomId)

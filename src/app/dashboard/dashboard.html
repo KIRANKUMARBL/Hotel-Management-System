@@ -12,7 +12,7 @@
         Staff Management
       </li>
 
-      <li *ngIf="role === 'OWNER' || role === 'MANAGER'" (click)="goToRooms()">
+      <li *ngIf="role === 'OWNER' || role === 'MANAGER'||role==='RECEPTIONIST'" (click)="goToRooms()">
         Rooms
       </li>
 
@@ -70,9 +70,13 @@
 </span>
     </div>
 
-    <p><strong>Room:</strong> {{ b.roomId }}</p>
-    <p><strong>Guest:</strong> {{ b.guestId }}</p>
+<p><strong>Room:</strong> {{ b.roomId }}</p>
 
+<p><strong>Guest:</strong> {{ b.guest?.name }}</p>
+
+<p><strong>Phone:</strong> {{ b.guest?.phone }}</p>
+
+<p><strong>Email:</strong> {{ b.guest?.email }}</p>
   </div>
 
 </div>

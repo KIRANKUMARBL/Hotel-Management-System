@@ -12,9 +12,14 @@ export const authGuard: CanActivateFn = (route) => {
   }
 
   const payload = JSON.parse(atob(token.split('.')[1]));
-  const userRole = payload.role;
+
+  // ✅ IMPORTANT FIX
+  const userRole = payload.role?.replace('ROLE_', '');
 
   const allowedRoles = route.data?.['roles'];
+
+  console.log("User Role:", userRole);
+  console.log("Allowed Roles:", allowedRoles);
 
   if (allowedRoles && !allowedRoles.includes(userRole)) {
     alert("Access Denied");
