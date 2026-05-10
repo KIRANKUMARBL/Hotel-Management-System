@@ -76,11 +76,15 @@
       <div class="details">
         <p><strong>Room:</strong> {{ b.roomId }}</p>
 
-        <!-- If backend gives guest object -->
-        <p *ngIf="b.guest"><strong>Guest:</strong> {{ b.guest.name }}</p>
+         <div *ngIf="b.guest" class="guest-info">
 
-        <!-- fallback -->
-        <p *ngIf="!b.guest"><strong>Guest ID:</strong> {{ b.guestId }}</p>
+           <p><strong>Guest:</strong> {{ b.guest.name }}</p>
+
+          <p><strong>Email:</strong> {{ b.guest.email }}</p>
+
+          <p><strong>Phone:</strong> {{ b.guest.phone }}</p>
+
+        </div>
       </div>
 
     </div>

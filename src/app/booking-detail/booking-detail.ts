@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-detail',
@@ -19,7 +20,8 @@ export class BookingDetail {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class BookingDetail {
         error: (err) => {
           console.log("Error:", err);
 
-          this.errorMessage = "Failed to load booking";
+          this.errorMessage = "  to load booking";
           this.isLoading = false;
 
           this.cd.detectChanges();
@@ -70,10 +72,9 @@ export class BookingDetail {
       next: () => {
         alert("Cancelled successfully");
 
-        // ✅ BEST: instant UI update (no reload needed)
         this.booking.status = 'CANCELLED';
 
-        this.cd.detectChanges();
+      this.router.navigate(['/rooms']);
       },
       error: (err) => {
         console.log("Cancel error:", err);

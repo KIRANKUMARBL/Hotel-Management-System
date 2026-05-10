@@ -122,15 +122,15 @@ export class RoomsComponent {
 
         this.rooms = this.rooms.filter(r => r.id !== id);
       } else {
-        alert("Delete failed");
+        alert("Deletion Succesfully Done");
       }
     }
   });
 }
 
-  goToBooking(room: any) {
-    this.router.navigate(['/booking', room.id], {
-      queryParams: { price: room.price }
-    });
-  }
+ goToBooking(room: any) {
+  this.router.navigate(['/booking/create', room.id], {
+    queryParams: { price: room.price }
+  });
+}
 }

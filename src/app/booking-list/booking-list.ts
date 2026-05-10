@@ -66,7 +66,7 @@ export class BookingListComponent {
     return this.bookings;
   }
 
-  openBooking(id: number) {
-    this.router.navigate(['/booking', id]);
-  }
+ openBooking(id: number) {
+  this.router.navigate(['/booking-details', id]);
+}
 }

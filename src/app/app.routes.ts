@@ -64,7 +64,10 @@ export const routes: Routes = [
     component: Payment,
     canActivate: [authGuard]
   },
-
+  {
+  path: 'booking-details/:bookingId',
+  component: BookingDetail
+  },
   {
     path: 'booking-list',
     component: BookingListComponent,

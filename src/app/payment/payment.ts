@@ -28,18 +28,31 @@ export class Payment {
   ) {}
 
   ngOnInit() {
-    this.bookingId = Number(this.route.snapshot.paramMap.get('bookingId'));
-    this.amount = Number(this.route.snapshot.queryParamMap.get('amount'));
-    this.orderId = this.route.snapshot.queryParamMap.get('orderId') || '';
+  const idParam = this.route.snapshot.paramMap.get('bookingId');
 
-    if (!this.bookingId || !this.amount || !this.orderId) {
-      this.router.navigate(['/rooms']);
-      return;
-    }
+  console.log("🔥 RAW PARAM:", idParam);
 
-    this.baseAmount = Math.round(this.amount / 1.1);
-    this.tax = this.amount - this.baseAmount;
+  if (!idParam) {
+    alert("Invalid booking ID");
+    this.router.navigate(['/rooms']);
+    return;
   }
+
+  this.bookingId = Number(idParam);
+
+  console.log(" FINAL BOOKING ID:", this.bookingId);
+
+  this.amount = Number(this.route.snapshot.queryParamMap.get('amount'));
+  this.orderId = this.route.snapshot.queryParamMap.get('orderId') || '';
+
+  if (!this.bookingId || !this.amount || !this.orderId) {
+    this.router.navigate(['/rooms']);
+    return;
+  }
+
+  this.baseAmount = Math.round(this.amount / 1.1);
+  this.tax = this.amount - this.baseAmount;
+}
 
   
   payNow() {

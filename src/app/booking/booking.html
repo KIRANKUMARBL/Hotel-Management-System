@@ -5,74 +5,95 @@
   <div class="form-card">
     <h2>Guest Details</h2>
 
-    <form (ngSubmit)="createBooking()" #bookingForm="ngForm">
+   <form (ngSubmit)="createBooking()" #bookingForm="ngForm">
 
+  <!-- NAME -->
   <label>Full Name</label>
-  <input 
+  <input
     name="name"
     [(ngModel)]="bookingRequest.guest.name"
-    required
     #name="ngModel"
+    required
+    minlength="3"
   />
-  <small class="error" *ngIf="name.invalid && name.touched">
-    Name is required
-  </small>
 
+  <div *ngIf="name.invalid && name.touched" class="error">
+    Name must be at least 3 characters
+  </div>
+
+  <!-- EMAIL -->
   <label>Email</label>
-  <input 
+  <input
     name="email"
     type="email"
     [(ngModel)]="bookingRequest.guest.email"
+    #email="ngModel"
     required
     email
-    #email="ngModel"
   />
-  <small class="error" *ngIf="email.invalid && email.touched">
-    Enter a valid email
-  </small>
 
+  <div *ngIf="email.invalid && email.touched" class="error">
+    Enter a valid email
+  </div>
+
+  <!-- PHONE -->
   <label>Phone</label>
-  <input 
+  <input
     name="phone"
     [(ngModel)]="bookingRequest.guest.phone"
+    #phone="ngModel"
     required
     pattern="[0-9]{10}"
-    #phone="ngModel"
   />
-  <small class="error" *ngIf="phone.invalid && phone.touched">
-    Enter valid 10-digit phone number
-  </small>
 
+  <div *ngIf="phone.invalid && phone.touched" class="error">
+    Enter valid 10-digit phone number
+  </div>
+
+  <!-- ADDRESS -->
   <label>Address</label>
-  <input 
+  <input
     name="address"
     [(ngModel)]="bookingRequest.guest.address"
-    required
     #address="ngModel"
+    required
+    minlength="5"
   />
-  <small class="error" *ngIf="address.invalid && address.touched">
-    Address is required
-  </small>
 
+  <div *ngIf="address.invalid && address.touched" class="error">
+    Address must be at least 5 characters
+  </div>
+
+  <!-- GENDER -->
   <label>Gender</label>
-  <select 
+
+  <select
     name="gender"
     [(ngModel)]="bookingRequest.guest.gender"
-    required
     #gender="ngModel"
+    required
   >
     <option value="">Select</option>
     <option value="MALE">Male</option>
     <option value="FEMALE">Female</option>
   </select>
-  <small class="error" *ngIf="gender.invalid && gender.touched">
-    Please select gender
-  </small>
 
-  <button 
+  <div *ngIf="gender.invalid && gender.touched" class="error">
+    Please select gender
+  </div>
+
+  <!-- BUTTON -->
+  <button
     type="submit"
     class="confirm-btn"
-    [disabled]="bookingForm.invalid || isLoading"
+    [disabled]="
+      isLoading ||
+      name.invalid ||
+      email.invalid ||
+      phone.invalid ||
+      address.invalid ||
+      gender.invalid
+    "
   >
     {{ isLoading ? 'Processing...' : 'Confirm Booking' }}
   </button>

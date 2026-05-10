@@ -1,17 +1,42 @@
 <div class="container">
 
   <!-- HERO -->
-  <div class="hero">
-    <img src="/assets/images/hotel_banner.jpg" alt="Hotel" />
-    <div class="overlay">
-      <h1>Luxury Hotel Experience</h1>
-      <p>Book your perfect stay</p>
-    </div>
+  <div class="hero" style="position: relative;">
+
+  <img 
+    src="/assets/login2.jpg" 
+    alt=""
+    style="width: 100%; height: 450px; object-fit: cover; border-radius: 20px;"
+  />
+
+  <div 
+    class="overlay"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      width: 100%;
+    "
+  >
+
+    <h1 style="font-size: 60px; margin-bottom: 15px;">
+      Luxury Hotel Experience
+    </h1>
+
+    <p style="font-size: 28px;">
+      Book your perfect stay
+    </p>
+
   </div>
 
+</div>
+
   <!-- TITLE -->
-  <h2 class="title">Rooms</h2>
-  <p class="role">Your Role: {{ role }}</p>
+  <h1 class="title">Rooms</h1>
+  <h3 class="title">Your Role: {{ role }}</h3>
 
   <!-- FILTER -->
   <div class="filter">
@@ -48,7 +73,7 @@
   </div>
 
   <!-- EMPTY -->
-  <p *ngIf="filteredRooms.length === 0" class="empty">
+  <p *ngIf="filteredRooms.length === 0" class="title">
     No rooms found
   </p>
 
@@ -57,11 +82,7 @@
     <div class="room-card" *ngFor="let room of filteredRooms">
 
       <!-- ROOM IMAGE -->
-      <img 
-        class="room-img"
-        [src]="'assets/images/room' + (room.id % 4 + 1) + '.jpg'" 
-        alt="Room"
-      />
+    
 
       <h3>{{ room.type }}</h3>
       <p class="price">₹{{ room.price }}</p>

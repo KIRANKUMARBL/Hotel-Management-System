@@ -40,15 +40,15 @@ export class BookingComponent {
   this.price = this.route.snapshot.queryParamMap.get('price');
   this.bookingRequest.booking.roomId = this.roomId;
 
-  //console.log("Room ID:", this.roomId);
-  //console.log("Price:", this.price);
+  console.log("Room ID:", this.roomId);
+  console.log("Price:", this.price);
 }
 isLoading = false;
 createBooking() {
   this.isLoading = true;
 
   this.http.post<any>(
-    'http://localhost:8080/booking-service/booking',
+    'http://localhost:8080/booking-service/booking/create',
     this.bookingRequest
   ).subscribe({
     next: (res) => {

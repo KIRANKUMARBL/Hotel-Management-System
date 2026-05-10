@@ -9,20 +9,71 @@
       <div class="form-card">
         <h3>Add Staff</h3>
 
-        <input placeholder="Full Name" [(ngModel)]="newStaff.name">
-        <input placeholder="Email" [(ngModel)]="newStaff.email">
-        <input type="password" placeholder="Password" [(ngModel)]="newStaff.password">
+        <!-- NAME -->
+        <input 
+          name="name"
+          placeholder="Full Name"
+          [(ngModel)]="newStaff.name"
+          #name="ngModel"
+          required
+          minlength="3"
+        >
+        <div *ngIf="name.invalid && name.touched" class="error">
+          Name must be at least 3 characters
+        </div>
 
-        <select [(ngModel)]="newStaff.role">
+        <!-- EMAIL -->
+        <input 
+          name="email"
+          placeholder="Email"
+          [(ngModel)]="newStaff.email"
+          #email="ngModel"
+          required
+          email
+        >
+        <div *ngIf="email.invalid && email.touched" class="error">
+          Enter a valid email
+        </div>
+
+        <!-- PASSWORD -->
+        <input 
+          type="password"
+          name="password"
+          placeholder="Password"
+          [(ngModel)]="newStaff.password"
+          #password="ngModel"
+          required
+          minlength="6"
+        >
+        <div *ngIf="password.invalid && password.touched" class="error">
+          Password must be at least 6 characters
+        </div>
+
+        <!-- ROLE -->
+        <select 
+          name="role"
+          [(ngModel)]="newStaff.role"
+          #role="ngModel"
+          required
+        >
           <option value="">Select Role</option>
           <option value="OWNER">Owner</option>
           <option value="MANAGER">Manager</option>
           <option value="RECEPTIONIST">Receptionist</option>
         </select>
 
-        <button (click)="addStaff()" [disabled]="isSubmitting">
+        <div *ngIf="role.invalid && role.touched" class="error">
+          Please select a role
+        </div>
+
+        <!-- BUTTON -->
+        <button 
+          (click)="addStaff()"
+          [disabled]="isSubmitting || name.invalid || email.invalid || password.invalid || role.invalid"
+        >
           {{ isSubmitting ? 'Adding...' : 'Add Staff' }}
         </button>
+
       </div>
 
     </div>

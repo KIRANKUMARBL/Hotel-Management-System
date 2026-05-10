@@ -48,6 +48,10 @@
 .title {
   text-align: center;
   margin-top: 10px;
+
+  color: #d62828;
+
+  text-shadow: 2px 2px 8px rgba(10, 73, 247, 0.403);
 }
 
 .role {
@@ -188,3 +192,4 @@ button {
   color: gray;
   margin-top: 20px;
 }
+

@@ -110,3 +110,8 @@
   border-radius: 10px;
   font-size: 12px;
 }
+.dashboard-container {
+  background: url('/assets/login2.jpg') no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+}
