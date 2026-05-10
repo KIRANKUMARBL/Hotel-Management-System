@@ -36,38 +36,55 @@ public class BookingService {
     @Async
     public CompletableFuture<Map<String, Object>> createBooking(BookingRequest request) {
 
-        // Save guest
+        // ✅ Validate request
+        if (request == null ||
+            request.getGuest() == null ||
+            request.getBooking() == null) {
+
+            throw new RuntimeException("Invalid booking request");
+        }
+
+        // ✅ Save guest
         Guest savedGuest = guestRepository.save(request.getGuest());
 
-        // Prepare booking
+        // ✅ Prepare booking
         Booking booking = request.getBooking();
         booking.setGuestId(savedGuest.getId());
 
-        // Check room
+        // ✅ Fetch room
         Room room = roomClient.getRoomById(booking.getRoomId());
 
-        if (room == null || !room.isAvailable()) {
+        if (room == null) {
+            throw new RuntimeException("Room not found$");
+        }
+
+        // ✅ Room already booked
+        if (!room.isAvailable()) {
             throw new RuntimeException("Room not available");
         }
 
-        // Update room availability
+        // ✅ Mark room unavailable
         room.setAvailable(false);
         roomClient.updateRoom(room.getId(), room);
 
-        // Save booking
-        booking.setStatus("PENDING");
-        Booking saved = bookingRepository.save(booking);
+        // ✅ Save booking
+        booking.setStatus("CONFIRMED");
 
-        // ✅ ONLY PAYMENT CALL (Billing handled inside Payment)
-//        Map<String, Object> paymentRequest = new HashMap<>();
-//        paymentRequest.put("bookingId", saved.getId());
-//        paymentRequest.put("amount", room.getPrice());
-//
-//        paymentClient.makePayment(paymentRequest);
+        Booking savedBooking = bookingRepository.save(booking);
 
-        // Final response
+        // ✅ OPTIONAL PAYMENT
+		/*
+		 * Map<String, Object> paymentRequest = new HashMap<>();
+		 * paymentRequest.put("bookingId", savedBooking.getId());
+		 * paymentRequest.put("amount", room.getPrice());
+		 * 
+		 * paymentClient.makePayment(paymentRequest);
+		 */
+        
+
+        // ✅ Response
         Map<String, Object> response = new HashMap<>();
-        response.put("booking", saved);
+        response.put("booking", savedBooking);
         response.put("guest", savedGuest);
 
         return CompletableFuture.completedFuture(response);
@@ -76,7 +93,7 @@ public class BookingService {
     public Booking cancelBooking(int bookingId) {
 
         Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                .orElseThrow(() -> new RuntimeException("Booking not found4"));
 
         // ✅ update status
         booking.setStatus("CANCELLED");

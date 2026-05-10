@@ -53,28 +53,15 @@ public class SecurityConfig {
                     .hasAnyRole("OWNER", "MANAGER")
 
                 .pathMatchers(HttpMethod.DELETE, "/room-service/**")
-                    .hasRole("OWNER")
-
-//
-//                .pathMatchers(HttpMethod.GET, "/inventory-service/**")
-//                    .hasAnyRole("OWNER", "MANAGER")
-//
-//                .pathMatchers(HttpMethod.POST, "/inventory-service/**")
-//                    .hasAnyRole("OWNER", "MANAGER")
-//
-//                .pathMatchers(HttpMethod.PUT, "/inventory-service/**")
-//                    .hasAnyRole("OWNER", "MANAGER")
-//
-//                .pathMatchers(HttpMethod.DELETE, "/inventory-service/**")
-//                    .hasRole("OWNER")
-
+                .hasAnyRole("OWNER", "MANAGER")
+ 
 
                 .pathMatchers("/booking-service/**")
                     .hasAnyRole("OWNER", "MANAGER", "RECEPTIONIST")
+                    
 
-
-                .pathMatchers("/payment-service/**")
-                    .hasAnyRole("OWNER", "RECEPTIONIST")
+                    .pathMatchers("/payment-service/**")
+                    .hasAnyRole("OWNER", "MANAGER", "RECEPTIONIST")
 
                 .pathMatchers(HttpMethod.GET, "/user-service/users/**")
                     .hasAnyRole("OWNER", "RECEPTIONIST")

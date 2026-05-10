@@ -38,7 +38,7 @@ public class BookingController {
     }
 
     // ✅ CREATE BOOKING
-    @PostMapping
+    @PostMapping("/create")
     public CompletableFuture<Map<String, Object>> createBooking(
             @Valid @RequestBody BookingRequest request) {
         return bookingService.createBooking(request);
@@ -48,7 +48,7 @@ public class BookingController {
     @GetMapping("/all")
     public List<BookingDTO> getAllBookings() {
 
-        return bookingRepository.findAll()
+        return bookingRepository.findAllByOrderByIdDesc()
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
@@ -59,7 +59,7 @@ public class BookingController {
     public BookingDTO getBookingById(@PathVariable int id) {
 
         Booking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                .orElseThrow(() -> new RuntimeException("Booking not found1"));
 
         return convertToDTO(booking);
     }
@@ -76,7 +76,7 @@ public class BookingController {
     public BookingDTO updateBooking(@PathVariable int id, @RequestBody BookingDTO dto) {
 
         Booking existing = bookingRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                .orElseThrow(() -> new RuntimeException("Booking not found2"));
 
         if (dto.getStatus() != null) {
             existing.setStatus(dto.getStatus());
@@ -92,7 +92,7 @@ public class BookingController {
     public Guest updateGuest(@PathVariable int id, @RequestBody Guest guest) {
 
         Guest existing = guestRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Guest not found"));
+                .orElseThrow(() -> new RuntimeException("Guest not found3"));
 
         existing.setName(guest.getName());
         existing.setEmail(guest.getEmail());
@@ -141,5 +141,5 @@ public class BookingController {
         }
 
         return dto;
-    }
+    } 
 }
